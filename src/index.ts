@@ -2,6 +2,7 @@ import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import 'dotenv/config';
 import interactionCreate from './Events/interactionCreate';
 import addRole from './DigiLab/addRole';
+import memberJoin from './DigiLab/memberJoin';
 
 const client = new Client({
     intents: [
@@ -16,5 +17,7 @@ const client = new Client({
 
 interactionCreate(client);
 addRole(client);
+memberJoin(client);
 
-client.login(process.env.TOKEN);
+// client.login(process.env.TOKEN);
+client.login(process.env.PROD_TOKEN);
