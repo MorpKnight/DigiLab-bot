@@ -3,7 +3,7 @@ import 'dotenv/config';
 import interactionCreate from './Events/interactionCreate';
 import addRole from './DigiLab/addRole';
 import memberJoin from './DigiLab/memberJoin';
-import autoPraktikan from './DigiLab/autoPraktikan';
+import ready from './Events/ready';
 
 const client = new Client({
     intents: [
@@ -19,7 +19,7 @@ const client = new Client({
 interactionCreate(client);
 addRole(client);
 memberJoin(client);
-autoPraktikan(client);
+ready(client);
 
 client.login(process.env.TOKEN);
 // client.login(process.env.PROD_TOKEN);
