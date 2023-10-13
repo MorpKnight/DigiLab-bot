@@ -2,7 +2,7 @@ import { Client, CommandInteraction, ApplicationCommandType } from "discord.js";
 import { Command } from "../commandBuilder/commandBuiler";
 
 export const printInputGiven: Command = {
-    name: "printInput",
+    name: "getInput",
     description: "Print input given",
     type: ApplicationCommandType.ChatInput,
     options: [
