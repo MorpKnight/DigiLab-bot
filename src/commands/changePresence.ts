@@ -1,8 +1,9 @@
-import { Client, CommandInteraction, ApplicationCommandType } from "discord.js";
-import { Command } from "../commandBuilder/commandBuiler";
+import { Client, CommandInteraction, ApplicationCommandType, ActivityType} from "discord.js";
+import { Command, CommandOwnerOnly } from "../commandBuilder/commandBuiler";
 
-export const changePresence: Command = {
-    name: "changePresence",
+export const changePresence: CommandOwnerOnly = {
+    ownerOnly: true,
+    name: "presence",
     description: "Change presence",
     type: ApplicationCommandType.ChatInput,
     options: [
@@ -38,10 +39,36 @@ export const changePresence: Command = {
         }
     ],
     run: async (client: Client, interaction: CommandInteraction) => {
-        const type = interaction.options.get("type");
-        const text = interaction.options.get("text");
-        console.log(type?.value);
-        console.log(text?.value);
+        if (interaction.user.id !== "385053392059236353") {
+            await interaction.followUp("You are not allowed to use this command");
+            return;
+        }
+        const type = interaction.options.get("type")?.value as string;
+        const text = interaction.options.get("text")?.value as string;
+        let activityType: ActivityType;
+        switch (type) {
+            case "PLAYING":
+                activityType = ActivityType.Playing;
+                break;
+            case "WATCHING":
+                activityType = ActivityType.Watching;
+                break;
+            case "LISTENING":
+                activityType = ActivityType.Listening;
+                break;
+            case "STREAMING":
+                activityType = ActivityType.Streaming;
+                break;
+            default:
+                activityType = ActivityType.Playing;
+                break;
+        }
+        await client.user?.setPresence({
+            activities: [{
+                name: text,
+                type: activityType
+            }]
+        });
         await interaction.followUp("Done");
     }
 }

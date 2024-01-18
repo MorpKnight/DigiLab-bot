@@ -11,8 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-ai/generativelanguage": "^1.1.0",
     "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
+    "google-auth-library": "^9.1.0",
     "ts-node": "^10.9.1"
   }
 }

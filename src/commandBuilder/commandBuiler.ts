@@ -3,3 +3,7 @@ import { CommandInteraction, ChatInputApplicationCommandData, Client } from 'dis
 export interface Command extends ChatInputApplicationCommandData {
     run: (client: Client, interaction: CommandInteraction) => void;
 }
+
+export interface CommandOwnerOnly extends Command {
+    ownerOnly: boolean;
+}
